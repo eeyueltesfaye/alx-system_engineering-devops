@@ -1,0 +1,2 @@
+#!/bin/bash
+printf "%X\n" "$(( $((water#$WATER)) + $((stir#$STIR)) ))" | tr '[:upper:]' '[:lower:]'
