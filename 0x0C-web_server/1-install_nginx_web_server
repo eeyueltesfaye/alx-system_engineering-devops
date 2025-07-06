@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
-# This script installs a nginx web server
+# Installs nginx and sets up a Hello World page on port 80
 
-sudo apt update
-sudo apt install nginx -y
-sudo ufw allow 22
-sudo ufw allow 80
-sudo ufw --force enable
-sudo ufw status
-systemctl status nginx
-echo 'Hello World!' | sudo tee /var/www/html/index.nginx-debian.html > /dev/null
-sudo service nginx restart
+apt-get update -y
+apt-get install nginx -y
+
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
+
+service nginx restart
