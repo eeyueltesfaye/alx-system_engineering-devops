@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Displays info about subdomains for a given domain
+
+domain="$1"
+subdomain="$2"
+
+get_subdomain_info() {
+    local domain=$1
+    local subdomain=$2
+    # Use dig and awk to extract the A record destination
+    result=$(dig +short ${subdomain}.${domain} | awk 'NR==1 {print $1}')
+    if [ -n "$result" ]; then
+        echo "The subdomain $subdomain is a A record and points to $result"
+    fi
+}
+
+if [ -z "$subdomain" ]; then
+    for s in www lb-01 web-01 web-02; do
+        get_subdomain_info "$domain" "$s"
+    done
+else
+    get_subdomain_info "$domain" "$subdomain"
+fi
